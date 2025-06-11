@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>🔴 Live Stream</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=logout"
+	/>
+	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest">
+
+	</script>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+		@font-face {
+			font-family: "AL-KANZ Medium";
+			src: url("AILERON-THIN.OTF");
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: "Arial", sans-serif;
+			background: linear-gradient(135deg, #a2c2e5, #f1f8ff);
+			color: white;
+			min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			padding: 20px;
+			overflow-x: hidden;
+		}
+
+		.Create {
+			font-family: "AL-KANZ Medium";
+			font-size: 15px;
+			position: absolute;
+			bottom: 20px;
+			left: 20px;
+			color: #888;
+		}
+
+		.marquee {
+			font-family: "AL-KANZ Medium";
+			font-size: 24px;
+			color: black;
+			position: absolute;
+			top: 10px;
+			text-align: center;
+			width: 100%;
+		}
+
+		.container {
+			background: rgba(255, 255, 255, 0.2);
+			padding: 10px;
+			border-radius: 15px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			width: 100%;
+			max-width: 900px;
+		}
+
+		video {
+			width: 100%;
+			height: auto;
+			max-height: 500px;
+			border: 0px solid white;
+			border-radius: 10px;
+		}
+
+
+		h1 {
+			text-align: center;
+			color: white;
+			margin-bottom: 20px;
+			font-size: 28px;
+		}
+
+		h2 {
+			font-size: 100px;
+			font-family: "Indie Flower", cursive;
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		.live-badge {
+			position: fixed;
+			top: 20px;
+			left: 20px;
+			background: black;
+			color: white;
+			padding: 5px 12px;
+			font-size: 16px;
+			font-weight: bold;
+			border-radius: 20px;
+			z-index: 1000;
+			font-family: sans-serif;
+		}
+
+		.dot {
+			animation: pulse 1s infinite;
+
+		}
+
+		@keyframes pulse {
+			0% {
+				opacity: 1;
+			}
+			50% {
+				opacity: 0.5;
+			}
+			100% {
+				opacity: 1;
+				color: white;
+			}
+		}
+
+		.Wait {
+			font-family: "Indie Flower", cursive;
+			font-weight: 400;
+			font-style: normal;
+			font-size: 100px;
+			text-align: center;
+		}
+
+		.h {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			font-weight: bold;
+			font-size: 16px;
+			text-decoration: none;
+			color: white;
+			padding: 8px 14px;
+			background-color: rgba(255, 255, 255, 0.1);
+			border: 2px solid white;
+			border-radius: 6px;
+			backdrop-filter: blur(4px);
+			transition: all 0.3s ease;
+			z-index: 1001;
+		}
+
+		.h:hover {
+			color: #ff7cd3;
+			border-color: #ff7cd3;
+			background-color: rgba(255, 255, 255, 0.15);
+		}
+
+
+
+
+		@media screen and (max-width: 768px) {
+			.container {
+				padding: 8px;
+			}
+
+			h2 {
+				font-size: 90px;
+				font-family: "Indie Flower", cursive;
+				font-weight: 400;
+				font-style: normal;
+			}
+
+			.live-badge {
+				top: 10px;
+				left: 10px;
+				font-size: 14px;
+				padding: 4px 10px;
+			}
+
+			.h {
+				top: 10px;
+				right: 10px;
+				font-size: 14px;
+			}
+
+			.Wait {
+				font-size: 60px;
+			}
+		}
+
+		@media screen and (max-width: 480px) {
+			.Wait {
+				font-size: 40px;
+			}
+
+			h1 {
+				font-size: 20px;
+			}
+			h2 {
+				font-size: 50px;
+				font-family: "Indie Flower", cursive;
+				font-weight: 400;
+				font-style: normal;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<!-- <div class="live-badge"><span class="dot">🔴</span> LIVE</div> -->
+	<a href="../../Guessing.html" class="h">Guess</a>
+
+  <div class="container">
+   	<!--    <h1>Streaming Ceremony Live</h1>-->
+    <video id="video" controls autoplay muted playsinline></video> 
+	<!-- <h2>We Will Be Live Soon</h2> -->
+	</div>
+	<button onclick="logout()" style="
+  position: fixed;
+  bottom: 20px;
+  right: 18px;
+  padding: 0px;
+  background-color: transparent;
+  color: black;
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
+  z-index: 1000;
+">
+<span class="material-symbols-outlined" style="color:black; position:relative; left: 0px; top:7px;">
+logout
+</span>
+Logout</button> 
+
+
+
+  <label class="Create">ⓘ Created and Designed by: Ali Asger Gadi</label>
+  <script>
+    // ✅ Check if user is logged in
+    const isLoggedIn = localStorage.getItem("loggedIn") === "yes";
+
+    if (!isLoggedIn) {
+      window.location.href = "../../LoginPage.html";
+    }
+
+    // ✅ Logout function
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("userEmail"); // Optional if you store email
+      window.location.href = "../../LoginPage.html";
+    }
+
+    // ✅ HLS.js player setup
+    const video = document.getElementById('video');
+    const streamUrl = 'https://level-parish-participate-nights.trycloudflare.com/hls/test.m3u8';
+
+    if (Hls.isSupported()) {
+      const hls = new Hls({
+        lowLatencyMode: true,
+        liveSyncDurationCount: 3,
+        maxLiveSyncPlaybackRate: 1.5,
+        enableWorker: true,
+        liveDurationInfinity: true
+      });
+
+      hls.loadSource(streamUrl);
+      hls.attachMedia(video);
+
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play().catch(e => console.warn("Autoplay blocked:", e));
+      });
+
+      hls.on(Hls.Events.FRAG_LOADED, function () {
+        // Optional: show status
+      });
+
+      hls.on(Hls.Events.ERROR, function (event, data) {
+        if (data.fatal) {
+          switch (data.type) {
+            case Hls.ErrorTypes.NETWORK_ERROR:
+              hls.startLoad();
+              break;
+            case Hls.ErrorTypes.MEDIA_ERROR:
+              console.warn("Media error - recovering...");
+              hls.recoverMediaError();
+              break;
+            default:
+              console.warn("Unrecoverable error - reloading page.");
+              location.reload();
+              break;
+          }
+        }
+      });
+
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = streamUrl;
+      video.addEventListener('loadedmetadata', function () {
+        video.play().catch(e => console.warn("Autoplay blocked:", e));
+      });
+    } else {
+      alert("Your browser does not support HLS.");
+    }
+  </script>
+</body>
+</html>
+
+<!-- Replace your full <body> content with this updated version
+<body>
+  <a href="../../Guessing.html" class="h">Guess</a>
+  
+  <div class="live-badge" id="liveBadge"><span class="dot">🔴</span> LIVE</div>
+
+  <div class="container">
+    <h1 id="waitText" class="Wait">We Will Be Live Soon</h1>
+    <video id="video" controls autoplay muted playsinline style="display: none;"></video>
+    <button id="goLiveBtn" style="
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+    ">Go Live</button>
+  </div>
+
+  <button onclick="logout()" style="
+    position: fixed;
+    bottom: 20px;
+    right: 18px;
+    padding: 0px;
+    background-color: transparent;
+    color: black;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    z-index: 1000;
+  ">
+    <span class="material-symbols-outlined" style="color:black; position:relative; top:7px;">
+      logout
+    </span>
+    Logout
+  </button> 
+
+  <script>
+    if (localStorage.getItem("loggedIn") !== "yes") {
+      window.location.href = "LoginPage.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "LoginPage.html";
+    }
+
+    const video = document.getElementById('video');
+    const waitText = document.getElementById('waitText');
+    const liveBadge = document.getElementById('liveBadge');
+    const goLiveBtn = document.getElementById('goLiveBtn');
+    const streamUrl = 'https://expansys-cardiovascular-discussed-ink.trycloudflare.com/hls/test.m3u8';
+
+    if (Hls.isSupported()) {
+      const hls = new Hls({
+        lowLatencyMode: true,
+        liveSyncDurationCount: 3,
+        maxLiveSyncPlaybackRate: 1.5,
+        enableWorker: true,
+        liveDurationInfinity: true
+      });
+
+      hls.loadSource(streamUrl);
+      hls.attachMedia(video);
+
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        waitText.style.display = 'none';
+        video.style.display = 'block';
+        goLiveBtn.style.display = 'inline-block';
+        video.play().catch(e => console.warn("Autoplay blocked:", e));
+      });
+
+      hls.on(Hls.Events.ERROR, function (event, data) {
+        if (data.fatal) {
+          switch (data.type) {
+            case Hls.ErrorTypes.NETWORK_ERROR:
+              console.warn("Network error - retrying...");
+              hls.startLoad();
+              break;
+            case Hls.ErrorTypes.MEDIA_ERROR:
+              console.warn("Media error - recovering...");
+              hls.recoverMediaError();
+              break;
+            default:
+              console.warn("Unrecoverable error - reloading page.");
+              location.reload();
+              break;
+          }
+        }
+      });
+
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = streamUrl;
+      video.addEventListener('loadedmetadata', function () {
+        waitText.style.display = 'none';
+        video.style.display = 'block';
+        goLiveBtn.style.display = 'inline-block';
+        video.play().catch(e => console.warn("Autoplay blocked:", e));
+      });
+    } else {
+      alert("Your browser does not support HLS.");
+    }
+
+    // Go Live button handler
+    goLiveBtn.addEventListener('click', function () {
+      if (video.seekable.length > 0) {
+        const end = video.seekable.end(0);
+        video.currentTime = end;
+        video.play();
+      }
+    });
+  </script>
+</body>
+ -->

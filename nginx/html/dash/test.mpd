@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<MPD
+    type="dynamic"
+    xmlns="urn:mpeg:dash:schema:mpd:2011"
+    availabilityStartTime="2025-03-28T16:36:46+05:30"
+    availabilityEndTime="2025-03-28T16:37:58+05:30"
+    minimumUpdatePeriod="PT5S"
+    minBufferTime="PT5S"
+    timeShiftBufferDepth="PT0H0M0.00S"
+    suggestedPresentationDelay="PT10S"
+    profiles="urn:hbbtv:dash:profile:isoff-live:2012,urn:mpeg:dash:profile:isoff-live:2011"
+    xmlns:xsi="http://www.w3.org/2011/XMLSchema-instance"
+    xsi:schemaLocation="urn:mpeg:DASH:schema:MPD:2011 DASH-MPD.xsd">
+  <Period start="PT0S" id="dash">
+    <AdaptationSet
+        id="1"
+        segmentAlignment="true"
+        maxWidth="1280"
+        maxHeight="720"
+        maxFrameRate="30">
+      <Representation
+          id="test_H264"
+          mimeType="video/mp4"
+          codecs="avc1.640032"
+          width="1280"
+          height="720"
+          frameRate="30"
+          sar="1:1"
+          startWithSAP="1"
+          bandwidth="10000000">
+        <SegmentTemplate
+            presentationTimeOffset="0"
+            timescale="1000"
+            media="test-$Time$.m4v"
+            initialization="test-init.m4v">
+          <SegmentTimeline>
+             <S t="131966" d="6000"/>
+             <S t="137966" d="6000"/>
+             <S t="143966" d="6000"/>
+             <S t="149966" d="6000"/>
+             <S t="155966" d="6000"/>
+             <S t="161966" d="6000"/>
+             <S t="167966" d="6000"/>
+             <S t="173966" d="6000"/>
+             <S t="179966" d="6000"/>
+             <S t="185966" d="6000"/>
+             <S t="191966" d="6000"/>
+             <S t="197966" d="6000"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet
+        id="2"
+        segmentAlignment="true">
+      <AudioChannelConfiguration
+          schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011"
+          value="1"/>
+      <Representation
+          id="test_AAC"
+          mimeType="audio/mp4"
+          codecs="mp4a.40.2"
+          audioSamplingRate="48000"
+          startWithSAP="1"
+          bandwidth="160000">
+        <SegmentTemplate
+            presentationTimeOffset="0"
+            timescale="1000"
+            media="test-$Time$.m4a"
+            initialization="test-init.m4a">
+          <SegmentTimeline>
+             <S t="131966" d="6000"/>
+             <S t="137966" d="6000"/>
+             <S t="143966" d="6000"/>
+             <S t="149966" d="6000"/>
+             <S t="155966" d="6000"/>
+             <S t="161966" d="6000"/>
+             <S t="167966" d="6000"/>
+             <S t="173966" d="6000"/>
+             <S t="179966" d="6000"/>
+             <S t="185966" d="6000"/>
+             <S t="191966" d="6000"/>
+             <S t="197966" d="6000"/>
+          </SegmentTimeline>
+        </SegmentTemplate>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>
